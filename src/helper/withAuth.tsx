@@ -21,12 +21,12 @@ interface State {
 
 const mapStateToProps = (state: any): StateProps => {
     return {
-        authState: state.authState
+        authState: state.combineReducer.authState
     };
 }
 
 export const withAuth = (ComponentToProtect: any) => {
-    return connect(mapStateToProps, { saveLoginDetail: saveLoginDetail })(class extends Component<Props, State> {
+    return connect(mapStateToProps, {})(class extends Component<Props, State> {
         constructor(props: any) {
             super(props);
             this.state = {
@@ -39,7 +39,7 @@ export const withAuth = (ComponentToProtect: any) => {
             const token = localStorage.getItem('token');
             let redirect = true
             if (token) {
-                this.props.saveLoginDetail(token);
+                saveLoginDetail(token);
                 redirect = false
             }
             this.setState({ loading: false, redirect })

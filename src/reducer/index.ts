@@ -1,7 +1,7 @@
 
 import { AxiosError } from "axios";
 import { combineReducers } from "redux";
-import { GET_REQUEST } from "../action";
+import { GET_MY_TICKETS } from "../action";
 import { authReducer } from './auth.reducer';
 
 export interface InitialState {
@@ -17,14 +17,15 @@ const initialState: InitialState = {
 };
 
 const dogReducer = (state = initialState, action: any) => {
-
     const { type } = action;
+
+    console.log(type)
     switch (type) {
-        case GET_REQUEST.REQUEST:
+        case GET_MY_TICKETS.REQUEST:
             return { ...state, loading: true, error: undefined }
-        case GET_REQUEST.FAILURE:
+        case GET_MY_TICKETS.FAILURE:
             return { ...state, loading: false, error: true }
-        case GET_REQUEST.SUCCESS:
+        case GET_MY_TICKETS.SUCCESS:
             return { ...state, loading: false, data: action.payload.data.message }
         default:
             return state
@@ -37,7 +38,7 @@ export const combineReducer = combineReducers({
 })
 
 export const getErrorFromPayload = (errorPayload: AxiosError): string => {
-    return (errorPayload.response && errorPayload.response.data && errorPayload.response.data.message )|| "Something Went Wrong";
+    return (errorPayload.response && errorPayload.response.data && errorPayload.response.data.message) || "Something Went Wrong";
 }
 
 export * from './auth.reducer';

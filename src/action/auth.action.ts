@@ -1,6 +1,7 @@
 import { defineRequestType, RequestType } from "./helper.action";
 
 export const AUTH_REQUEST: RequestType = defineRequestType("@AUTH_REQUEST");
+export const USER_REGISTER: RequestType = defineRequestType("@USER_REGISTER");
 
 export const authRequest = (authData: any) => { 
     return {
@@ -14,6 +15,23 @@ export const authRequest = (authData: any) => {
                 url: `/home/auth`,
                 method: 'post',
                 data: authData,
+            }
+        }
+    }
+}
+
+export const registerUser = (userData: any) => { 
+    return {
+        types: [
+            USER_REGISTER.REQUEST,
+            USER_REGISTER.SUCCESS,
+            USER_REGISTER.FAILURE
+        ],
+        payload: {
+            request: {
+                url: `/register`,
+                method: 'post',
+                data: userData,
             }
         }
     }

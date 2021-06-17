@@ -9,6 +9,14 @@ const client = axios.create({
   responseType: 'json'
 });
 
+client.interceptors.request.use((config: any) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = "Bearer " + token;
+  }
+  return config;
+});
+
 export const store = createStore(
   combineReducers({ combineReducer, form }),
   applyMiddleware(

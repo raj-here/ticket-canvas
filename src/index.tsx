@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { store } from './store';
 import { Login } from './Login';
 import { withAuth } from './helper/withAuth';
+import { Register } from './Register';
 
 
 
@@ -16,7 +17,8 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         <Route exact path="/login" component={Login} />
-        <Route path="/" component={withAuth(App)} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/**" component={withAuth(App)} />
       </Switch>
     </BrowserRouter>
   </Provider>,
