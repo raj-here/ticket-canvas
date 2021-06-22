@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Redirect, Link } from 'react-router-dom';
 
 import { authRequest, saveLoginDetail } from './action';
-import { AuthState } from './reducer';
+import { ApplicationState, AuthState } from './reducer';
 
 
 interface StateProps {
@@ -101,9 +101,9 @@ export const LoginForm = reduxForm({
 })(LoginFormComponenet);
 
 
-const mapStateToProps = (appState: any): StateProps => {
+const mapStateToProps = (appState: ApplicationState): StateProps => {
   return {
-    authState: appState.combineReducer.authReducer
+    authState: appState.authReducer
   };
 }
 
@@ -111,4 +111,4 @@ const mapDispatchToProps: DispatchProps = {
   authRequest: authRequest
 }
 
-export const Login = connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(LoginComponent);
+export const Login = connect<StateProps, DispatchProps, null, ApplicationState>(mapStateToProps, mapDispatchToProps)(LoginComponent);

@@ -21,7 +21,7 @@ interface State {
 
 const mapStateToProps = (state: any): StateProps => {
     return {
-        authState: state.combineReducer.authState
+        authState: state.authState
     };
 }
 

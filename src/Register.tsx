@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import { registerUser } from './action';
-import { AuthState } from './reducer';
+import { ApplicationState, AuthState } from './reducer';
 
 
 interface StateProps {
@@ -58,6 +58,7 @@ class RegisterComponent extends React.Component<Props, State> {
       <React.Fragment>
         {redirect && <Redirect to="/home" />}
         <div className="login-form">
+          <Link to='/login'>Login</Link>
           <h3>Register Form</h3>
           {message && <h1>{message}</h1>}
           {loading && <div className="loader">Requesting Server</div>}
@@ -116,9 +117,9 @@ export const RegisterForm = reduxForm({
 })(RegisterFormComponenet);
 
 
-const mapStateToProps = (appState: any): StateProps => {
+const mapStateToProps = (appState: ApplicationState): StateProps => {
   return {
-    authState: appState.combineReducer.authReducer
+    authState: appState.authReducer
   };
 }
 
@@ -126,4 +127,4 @@ const mapDispatchToProps: DispatchProps = {
   registerUser: registerUser
 }
 
-export const Register = connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(RegisterComponent);
+export const Register = connect<StateProps, DispatchProps, null, ApplicationState>(mapStateToProps, mapDispatchToProps)(RegisterComponent);

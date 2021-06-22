@@ -1,15 +1,15 @@
 import { defineRequestType, RequestType } from "./helper.action";
 
 
-export const GET_MY_TICKETS: RequestType = defineRequestType("@GET_MY_TICKETS");
+export const GET_TICKETS: RequestType = defineRequestType("@GET_TICKETS");
 
-export const getMyTickets = () => {
+export const getTickets = () => {
 
     return {
         types: [
-            GET_MY_TICKETS.REQUEST,
-            GET_MY_TICKETS.SUCCESS,
-            GET_MY_TICKETS.FAILURE
+            GET_TICKETS.REQUEST,
+            GET_TICKETS.SUCCESS,
+            GET_TICKETS.FAILURE
         ],
         payload: {
             request: {

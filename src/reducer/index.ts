@@ -1,40 +1,21 @@
-
 import { AxiosError } from "axios";
 import { combineReducers } from "redux";
-import { GET_MY_TICKETS } from "../action";
+import { reducer as form, FormStateMap } from 'redux-form';
+
 import { authReducer } from './auth.reducer';
+import { ticketReducer } from './ticket.reducer';
 
-export interface InitialState {
-    loading: boolean,
-    error: boolean,
-    data: any
-};
-
-const initialState: InitialState = {
-    loading: false,
-    error: false,
-    data: null
-};
-
-const dogReducer = (state = initialState, action: any) => {
-    const { type } = action;
-
-    console.log(type)
-    switch (type) {
-        case GET_MY_TICKETS.REQUEST:
-            return { ...state, loading: true, error: undefined }
-        case GET_MY_TICKETS.FAILURE:
-            return { ...state, loading: false, error: true }
-        case GET_MY_TICKETS.SUCCESS:
-            return { ...state, loading: false, data: action.payload.data.message }
-        default:
-            return state
-    }
+export interface ApplicationState {
+    ticketReducer: any;
+    authReducer: any;
+    form: FormStateMap;
 }
 
-export const combineReducer = combineReducers({
-    dogReducer,
-    authReducer
+
+export const rootReducer = combineReducers<ApplicationState>({
+    ticketReducer,
+    authReducer,
+    form
 })
 
 export const getErrorFromPayload = (errorPayload: AxiosError): string => {
@@ -42,3 +23,4 @@ export const getErrorFromPayload = (errorPayload: AxiosError): string => {
 }
 
 export * from './auth.reducer';
+export * from './ticket.reducer';
