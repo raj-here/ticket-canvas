@@ -1,17 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { History } from 'history';
 import { ApplicationState, TicketState } from "../../reducer";
 import { getTickets } from "../../action";
 
 interface StateProps {
-  state: TicketState;
+  ticketState: TicketState;
 }
 
 interface DispatchProps {
   getTickets: any,
 }
 
-type Props = DispatchProps & StateProps
+interface OwnProps {
+  history: History
+}
+
+type Props = DispatchProps & StateProps & OwnProps;
 
 interface State {
 
@@ -21,20 +26,21 @@ class TicketListComponent extends React.Component<Props, State> {
 
   public constructor(props: any) {
     super(props);
-    this.state = {
-      loading: true,
-    }
+    this.state = {};
 
     this.props.getTickets();
   }
 
   render(): JSX.Element {
-    const { state } = this.props;
-    const { data } = this.props.state;
+    const { ticketState } = this.props;
     return (
       <div>
-        {state.loading && <div className="loader"></div>
-        }
+        {ticketState.loading && <div className="loader"></div>}
+        <div style={{ display: 'flex' }}>
+          <div style={{ marginLeft: 'auto' }}>
+            <button className="button" style={{ backgroundColor: 'red' }} onClick={this.onNewButtonClick}>New Ticket</button>
+          </div>
+        </div>
         <table className="table">
           <thead>
             <tr>
@@ -45,9 +51,9 @@ class TicketListComponent extends React.Component<Props, State> {
           </thead>
           <tbody>
             {
-              data.map((ticket, index) => {
+              ticketState.list.map((ticket, index) => {
                 return (
-                  <tr key={index}>
+                  <tr key={index} onClick={() => this.onTicketRowClick(ticket.id)}>
                     <td>{ticket.ticketSubject}</td>
                     <td>{ticket.dateCreated}</td>
                     <td>{ticket.createdBy}</td>
@@ -61,11 +67,19 @@ class TicketListComponent extends React.Component<Props, State> {
     );
   }
 
+  onTicketRowClick = (ticketId: number) => {
+    this.props.history.push(`../ticket/${ticketId}`);
+  }
+
+  onNewButtonClick = () => {
+    this.props.history.push(`../new-ticket`);
+  }
+
 }
 
 const mapStateToProps = (appState: ApplicationState): StateProps => {
   return {
-    state: appState.ticketReducer
+    ticketState: appState.ticketReducer
   };
 }
 

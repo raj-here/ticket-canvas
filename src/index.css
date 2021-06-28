@@ -21,7 +21,7 @@ div.login-form{
     margin-top: 100px;
 }
 
-input[type=text],input[type=password] {
+input[type=text],input[type=password],select  {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -173,4 +173,28 @@ input[type=text],input[type=password] {
 }
 .navbar ul li a.active{
   background-color: #04AA6D;
+}
+
+.float-container {
+  border: 3px solid #fff;
+  padding: 20px;
+  display: flex;
+}
+
+.float-child {
+  width: 50%;
+  float: left;
+  padding: 20px;
+} 
+
+.button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }

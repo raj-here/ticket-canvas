@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink, Route, Switch } from 'react-router-dom';
 import { MyTickets, About, Contact, Home } from './components';
+import { NewTicket } from './components/ticket/NewTicket';
+import { Ticket } from './components/ticket/Ticket';
 
 export class App extends React.Component {
   render() {
@@ -20,6 +22,8 @@ export class App extends React.Component {
             <Route exact path="/about" component={About} />
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/tickets" component={MyTickets} />
+            <Route exact path="/ticket/:ticketId" component={Ticket} />
+            <Route exact path="/new-ticket" component={NewTicket} />
           </Switch>
         </div>
       </React.Fragment>
