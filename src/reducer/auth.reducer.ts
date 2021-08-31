@@ -16,7 +16,7 @@ const initialState: AuthState = {
 };
 
 export const authReducer = (state = initialState, action: any) => {
-    const { type } = action; 
+    const { type } = action;
     switch (type) {
         case AUTH_REQUEST.REQUEST:
         case USER_REGISTER.REQUEST:

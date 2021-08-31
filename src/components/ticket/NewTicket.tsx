@@ -55,7 +55,7 @@ class NewTicketComponent extends React.Component<Props, State> {
         const { message } = this.state;
         return (
             <div>
-                <h3>Register Form</h3>
+                <h3>Ticket Form</h3>
                 {message && <h1>{message}</h1>}
                 {loading && <div className="loader"></div>}
                 <NewTicketForm onSubmit={this.onSubmit} />

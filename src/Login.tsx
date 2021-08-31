@@ -102,6 +102,7 @@ export const LoginForm = reduxForm({
 
 
 const mapStateToProps = (appState: ApplicationState): StateProps => {
+  console.log(appState)
   return {
     authState: appState.authReducer
   };

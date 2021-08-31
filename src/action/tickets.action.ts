@@ -65,7 +65,7 @@ export const newTicket = (ticketData: any) => {
             request: {
                 url: `/ticket`,
                 method: 'post',
-                data: ticketData,
+                data: ticketData
             }
         }
     }
